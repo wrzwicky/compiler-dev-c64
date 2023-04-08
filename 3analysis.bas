@@ -105,7 +105,7 @@
 5170 if i=12 then 15500
 5180 if i=13 then 16000
 5190 if i=14 then 16500
-5200 if i=l5 then 17000
+5200 if i=15 then 17000
 5210 if i=16 then 17500
 5220 if i=17 then 18000
 5230 if i=18 then 18500
@@ -215,7 +215,7 @@
 13700 ou$="jsr $ab1e" : gosub 59000
 13710 return
 13800 be$=i1$ : ty%=3 : gosub 57000
-13810 if sc=o then me$="identifier not defined !" : goto 58700
+13810 if sc=0 then me$="identifier not defined !" : goto 58700
 13820 gosub 54000
 13830 ou$="jsr aus" : gosub 59000
 13840 return
@@ -229,7 +229,7 @@
 14510 ou$="jsr zvor" : gosub 59000
 14520 goto 5000
 
-15000 rem sclearscreen
+15000 rem clearscreen
 15010 ou$="jsr $e544" : gosub 59000
 15020 goto 5000
 
@@ -307,7 +307,7 @@
 17670 if i1$="ltgreen" then ff=13
 17680 if i1$="ltblue" then ff=14
 17690 if ff=-1 then me$="unknown color "+i1$ : goto 58700
-17700 ou$="lda #" +str$(ff) : gosub 59000
+17700 ou$="lda #"+str$(ff) : gosub 59000
 17710 ou$="sta 53280" : gosub 59000
 17720 goto 5020
 
@@ -371,7 +371,7 @@
 19490 goto 5020
 
 19500 rem assign
-19510 va$= ""
+19510 va$=""
 19520 gosub 55000 : gosub 55000 : gosub 55000
 19524 if i=41 then 19400
 19530 gosub 56500 : va$=i1$
@@ -383,24 +383,24 @@
 19610 va$=va$+"e"
 19620 gosub 55000 : gosub 55000
 19630 if i=59 then 19700
-19640 if i=52 then va$=va$+" +"
+19640 if i=52 then va$=va$+"+"
 19650 if i=53 then va$=va$+"-"
-19700 i1$=" " : gosub 56540
+19700 i1$="" : gosub 56540
 19710 va$=va$+i1$
 19900 gosub 51000
 19910 gosub 56000
 19920 be$=i1$ : ty%=3 : gosub 57000
-19930 if sc=o then me$=" identifier not defined !" : goto 58700
+19930 if sc=0 then me$=" identifier not defined !" : goto 58700
 19940 d9=d9+1
-19942 d9$=mid$(str$(d9) , 2 , len(str$(d9)) - 1)
-19946 ou$="jmp de" +d9$ : gosub 59000
+19942 d9$=mid$(str$(d9),2,len(str$(d9))-1)
+19946 ou$="jmp de"+d9$   : gosub 59000
 19950 ou$="dd"+d9$+" .m" : gosub 59000
 19952 ou$=" .b"+str$(v0) : gosub 59000
 19953 ou$=" .b"+str$(v1) : gosub 59000
 19954 ou$=" .b"+str$(v2) : gosub 59000
 19955 ou$=" .b"+str$(v3) : gosub 59000
 19956 ou$=" .b"+str$(v4) : gosub 59000
-19960 ou$="de" +d9$+" .m" : gosub 59000
+19960 ou$="de"+d9$+" .m" : gosub 59000
 19962 hi$=be$ : be$="dd" +d9$ : gosub 54000
 19970 be$=hi$ : gosub 53000
 19980 goto 5020
@@ -413,9 +413,9 @@
 20050 gosub 56030
 20060 be$=i1$ : ty%=3 : gosub 57000
 20070 if sc=0 then me$="identifier not defined !" : goto 58700
-20080 ou$= "ldy #hb-"+be$ : gosub 59000
-20090 ou$= "lda #lb-"+be$ : gosub 59000
-20100 ou$= "jsr $b867" : gosub 59000
+20080 ou$="ldy #hb-"+be$ : gosub 59000
+20090 ou$="lda #lb-"+be$ : gosub 59000
+20100 ou$="jsr $b867" : gosub 59000
 20110 gosub 56030
 20120 be$=i1$ : ty%=3 : gosub 57000
 20130 if sc=0 then me$="identifier not defined !" : goto 58700
@@ -446,7 +446,7 @@
 21030 if sc=0 then me$="identifier not defined !" : goto 58700
 21040 gosub 54000
 21050 gosub 56030
-21060 be$=11$ : ty%=3 : gosub 57000
+21060 be$=i1$ : ty%=3 : gosub 57000
 21070 if sc=0 then me$="identifier not defined !" : goto 58700
 21080 ou$="ldy #hb-"+be$ : gosub 59000
 21090 ou$="lda #lb-"+be$ : gosub 59000
@@ -468,7 +468,7 @@
 21575 gosub 54000
 21580 ou$="ldy #hb-"+hi$ : gosub 59000
 21590 ou$="lda #lb-"+hi$ : gosub 59000
-21600 ou$="jsr $bbof" : gosub 59000
+21600 ou$="jsr $bb0f" : gosub 59000
 21610 gosub 56030
 21620 be$=i1$ : ty%=3 : gosub 57000
 21630 if sc=0 then me$="identifier not defined !" : goto 58700
@@ -484,7 +484,7 @@
 22060 be$=i1$ : ty%=3 : gosub 57000
 22070 if sc=0 then me$="identifier not defined !" : goto 58700
 22080 gosub 54000
-22090 ou$= "jsr $bf7b" : gosub 59000
+22090 ou$="jsr $bf7b" : gosub 59000
 22110 gosub 56030
 22120 be$=i1$ : ty%=3 : gosub 57000
 22130 if sc=0 then me$="identifier not defined !" : goto 58700
@@ -506,10 +506,10 @@
 22620 if i1$="sine" then ff$="$e26b"
 22630 if i1$="squareroot" then ff$="$bf71"
 22640 if i1$="tangent" then ff$="$e2b4"
-22650 if ff$="" then me$= "unknown function !" : goto 58700
+22650 if ff$="" then me$="unknown function !" : goto 58700
 22660 gosub 56030
 22670 be$=i1$ : ty%=3 : gosub 57000
-22680 if sc=o then me$="identifier not defined !" : goto 58700
+22680 if sc=0 then me$="identifier not defined !" : goto 58700
 22690 gosub 54000
 22700 ou$="jsr "+ff$ : gosub 59000
 22705 gosub 55000 : gosub 55000
@@ -814,7 +814,7 @@
 59100 return
 
 60000 rem read error channel
-60010 input#15,en,em$,et,es : if en=o then return
+60010 input#15,en,em$,et,es : if en=0 then return
 60020 print#pr,chr$(13)chr$(13)
 60030 print#pr,"error on diskette !"
 60040 print#pr,"error report : ";em$
@@ -828,6 +828,7 @@
 60120 close 15
 60130 end
 
+!- Print the mini-syn file.
 61000 open 8,8,8,"mini-syn,s,r"
 61010 open 4,4
 61020 get#8,i$ : if st=64 then 61100
