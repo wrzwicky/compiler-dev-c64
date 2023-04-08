@@ -13,7 +13,7 @@ Errors:
 * assembler: missing lines in source code
 * parser: 
   - syntax errors may cause 'bad subscript error in 10440'
-* conditional.mini: not allowed in program name
+* conditional.mini: '-' not allowed in program name
 * exit.mini: can't name a program with a keyword
 * printer.mini: triggers a bug in Analysis "semantic error token=15"
 * selection.mini: same bug
